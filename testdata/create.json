@@ -1,0 +1,64 @@
+{
+    "name": "test1",
+    "cluster_type": "ManagedKubernetes",
+    "disable_rollback": true,
+    "timeout_mins": 60,
+    "kubernetes_version": "1.16.9-aliyun.1",
+    "region_id": "ap-southeast-1",
+    "snat_entry": true,
+    "cloud_monitor_flags": true,
+    "endpoint_public_access": true,
+    "deletion_protection": false,
+    "node_cidr_mask": "26",
+    "proxy_mode": "ipvs",
+    "tags": [],
+    "addons": [
+        {
+            "name": "flannel"
+        },
+        {
+            "name": "csi-plugin"
+        },
+        {
+            "name": "csi-provisioner"
+        },
+        {
+            "name": "logtail-ds",
+            "config": "{\"IngressDashboardEnabled\":\"false\"}"
+        },
+        {
+            "name": "ack-node-problem-detector",
+            "config": "{\"sls_project_name\":\"\"}"
+        },
+        {
+            "name": "nginx-ingress-controller",
+            "config": "{\"IngressSlbNetworkType\":\"internet\"}"
+        },
+        {
+            "name": "arms-prometheus"
+        }
+    ],
+    "os_type": "Linux",
+    "platform": "CentOS",
+    "runtime": {
+        "name": "docker",
+        "version": "19.03.5"
+    },
+    "worker_instance_types": [
+        "ecs.g5.large"
+    ],
+    "num_of_nodes": 2,
+    "worker_system_disk_category": "cloud_efficiency",
+    "worker_system_disk_size": 119,
+    "worker_instance_charge_type": "PostPaid",
+    "vpcid": "vpc-t4ne7qkpbbcgbns22pq8e",
+    "container_cidr": "172.23.0.0/16",
+    "service_cidr": "172.24.0.0/20",
+    "vswitch_ids": [
+        "vsw-t4ntt2tn54x4b80xj2oir"
+    ],
+    "key_pair": "临时",
+    "logging_type": "SLS",
+    "cpu_policy": "none",
+    "is_enterprise_security_group": true
+}
