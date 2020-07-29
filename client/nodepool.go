@@ -149,6 +149,12 @@ type NodeListResponse struct {
 	Page  PageInfo `json:"page"`
 }
 
+type RemoveNodeRequest struct {
+	Nodes       []string `json:"nodes"`
+	ReleaseNode bool     `json:"release_node"`
+	DrainNode   bool     `json:"drain_node"'`
+}
+
 func ListNodePools(clusterId string) ([]*NodePool, error) {
 	client := GetSdkClient()
 
@@ -203,6 +209,25 @@ func ScaleNodePool(clusterId, nodePoolId string, count int) error {
 	body, _ := json.Marshal(request)
 
 	err := client.Request("PUT", path, nil, &body, nil)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func RemoveNode(clusterId, nodeName string, release, drain bool) error {
+	client := GetSdkClient()
+
+	path := fmt.Sprintf("/api/v2/clusters/%s/nodes/remove", clusterId)
+	request := RemoveNodeRequest{
+		Nodes: []string{nodeName},
+		ReleaseNode: release,
+		DrainNode: drain,
+	}
+	body, _ := json.Marshal(request)
+
+	err := client.Request("POST", path, nil, &body, nil)
 	if err != nil {
 		return err
 	}
